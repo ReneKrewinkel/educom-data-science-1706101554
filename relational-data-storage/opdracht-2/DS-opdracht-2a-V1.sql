@@ -49,23 +49,54 @@ REFERENCES table2_name (primarykey table2);
 
 -- In table mhl_districts missing FK country_ID (mhl_countries):
 ALTER TABLE mhl_districts ADD CONSTRAINT country_ID FOREIGN KEY (country_ID) REFERENCES mhl_countries (id);
-SUCCES! 
+SUCCESS! 
 
 -- In table mhl_communes missing FK district_ID (mhl_districts):
 ALTER TABLE mhl_communes ADD CONSTRAINT district_ID FOREIGN KEY (district_ID) REFERENCES mhl_districts (id);
-SUCCES! 
+SUCCESS! 
+
+
 
 -- In table mhl_cities missing FK commune_ID (mhl_communes):
 ALTER TABLE mhl_cities ADD CONSTRAINT commune_ID FOREIGN KEY (commune_ID) REFERENCES mhl_communes (id);
 FAILED 
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-6ac_559`, CONSTRAINT `commune_ID` FOREIGN KEY (`commune_ID`) REFERENCES `mhl_communes` (`id`))
 
+SELECT commune_ID FROM mhl_cities WHERE commune_ID IS NULL; --empty result set (zero rows)
+SELECT id FROM mhl_communes WHERE id IS NULL; --empty result set (zero rows)
+
+SELECT mhl_cities.*, mhl_communes.* FROM mhl_cities INNER JOIN mhl_communes ON mhl_cities.commune_ID = mhl_communes.id;
+
+-- TRY:
+SELECT commune_ID FROM mhl_cities WHERE commune_ID NOT IN (SELECT ID FROM mhl_communes);
+SUCCESS! results: 755 and 0
+
+CREATE TABLE data_cities_communes
+SELECT * FROM mhl_cities 
+WHERE commune_ID = 755 OR commune_ID = 0;
+
+
+
+-- verplaats data dat niet in de tabel hoort (foutieve data) naar een aparte tabel zoals voorbeeld hieronder:
+create table x  select * from mhl_hitcount where year = 2013
+
+
+
 
 -- in table mhl_detaildefs missing FK group_id (mhl_detailgroups):
 ALTER TABLE mhl_detaildefs ADD CONSTRAINT group_id FOREIGN KEY (group_ID) REFERENCES mhl_detailgroups (id);
-SUCCES!
+SUCCESS!
 
 -- in table mhl_detaildefs missing FK propertytype_id (mhl_propertytypes):
 ALTER TABLE mhl_detaildefs ADD CONSTRAINT propertytype_ID FOREIGN KEY (propertytype_ID) REFERENCES mhl_propertytypes (id);
 FAILED
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-6ac_5e9`, CONSTRAINT `propertytype_ID` FOREIGN KEY (`propertytype_ID`) REFERENCES `mhl_propertytypes` (`id`))
+
+-- in table mhl_suppliers missing FK city_ID (mhl_cities):
+ALTER TABLE mhl_suppliers ADD CONSTRAINT city_ID FOREIGN KEY (city_ID) REFERENCES mhl_cities (id);
+FAILED
+#1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-32c_47`, CONSTRAINT `city_ID` FOREIGN KEY (`city_ID`) REFERENCES `mhl_cities` (`id`))
+
+-- in table mhl_suppliers missing FK p_city_ID (mhl_cities):
+FAILED
+#1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-32c_4f`, CONSTRAINT `p_city_ID` FOREIGN KEY (`p_city_ID`) REFERENCES `mhl_cities` (`id`))
