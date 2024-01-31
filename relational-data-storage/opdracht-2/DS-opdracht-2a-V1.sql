@@ -5,6 +5,8 @@
 -- Maak een SQL script dat foreign key constraint die bij deze database horen verwijderd en vervolgens weer aanmaakt
 -- Noem de file: 'DS-opdracht-2a-VN.sql' waarbij N staat staat voor de versie van je scriptCommit en push je werk naar Github
 
+---------------------------------------------
+----------- W3SCHOOLS INFORMATION ----------- 
 
 -- SQL NULL Values
 
@@ -45,15 +47,19 @@ FOREIGN KEY (designated foreignkey column table1)
 REFERENCES table2_name (primarykey table2);
 
 ----------------------------------------------
---ADD FOREIGN KEYS
+-------------- ADD FOREIGN KEYS --------------
 
 -- In table mhl_districts missing FK country_ID (mhl_countries):
 ALTER TABLE mhl_districts ADD CONSTRAINT country_ID FOREIGN KEY (country_ID) REFERENCES mhl_countries (id);
 SUCCESS! 
 
+-----------------------
+
 -- In table mhl_communes missing FK district_ID (mhl_districts):
 ALTER TABLE mhl_communes ADD CONSTRAINT district_ID FOREIGN KEY (district_ID) REFERENCES mhl_districts (id);
 SUCCESS! 
+
+-----------------------
 
 -- In table mhl_cities missing FK commune_ID (mhl_communes):
 ALTER TABLE mhl_cities ADD CONSTRAINT commune_ID FOREIGN KEY (commune_ID) REFERENCES mhl_communes (id);
@@ -86,22 +92,47 @@ WHERE commune_ID = 755 OR commune_ID = 0;
 ALTER TABLE mhl_cities ADD CONSTRAINT commune_ID FOREIGN KEY (commune_ID) REFERENCES mhl_communes (id);
 SUCCESS!
 
-
+-----------------------
 
 -- in table mhl_detaildefs missing FK group_id (mhl_detailgroups):
 ALTER TABLE mhl_detaildefs ADD CONSTRAINT group_id FOREIGN KEY (group_ID) REFERENCES mhl_detailgroups (id);
 SUCCESS!
+
+-----------------------
 
 -- in table mhl_detaildefs missing FK propertytype_id (mhl_propertytypes):
 ALTER TABLE mhl_detaildefs ADD CONSTRAINT propertytype_ID FOREIGN KEY (propertytype_ID) REFERENCES mhl_propertytypes (id);
 FAILED
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-6ac_5e9`, CONSTRAINT `propertytype_ID` FOREIGN KEY (`propertytype_ID`) REFERENCES `mhl_propertytypes` (`id`))
 
+-----------------------
+
 -- in table mhl_suppliers missing FK city_ID (mhl_cities):
 ALTER TABLE mhl_suppliers ADD CONSTRAINT city_ID FOREIGN KEY (city_ID) REFERENCES mhl_cities (id);
 FAILED
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-32c_47`, CONSTRAINT `city_ID` FOREIGN KEY (`city_ID`) REFERENCES `mhl_cities` (`id`))
 
+-- This selects all rows where the city_id from mhl_suppliers is not present in the mhl_cities ID row:
+SELECT city_ID FROM mhl_suppliers WHERE city_ID NOT IN (SELECT ID FROM mhl_cities);
+SUCCES! 241 rows with different IDS
+
+-- Create a new table with false data from mhl_suppliers
+CREATE TABLE data_suppliers_cities
+SELECT * FROM mhl_suppliers
+WHERE city_id NOT IN (SELECT ID FROM mhl_cities);
+
+-- Delete false data from mhl_suppliers
+DELETE FROM mhl_suppliers
+WHERE city_id NOT IN (SELECT ID FROM mhl_cities);
+(241 rows affected)
+
+-- Try FK again:
+ALTER TABLE mhl_suppliers ADD CONSTRAINT city_ID FOREIGN KEY (city_ID) REFERENCES mhl_cities (id);
+SUCCESS!
+ -----------------------
+
 -- in table mhl_suppliers missing FK p_city_ID (mhl_cities):
 FAILED
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-32c_4f`, CONSTRAINT `p_city_ID` FOREIGN KEY (`p_city_ID`) REFERENCES `mhl_cities` (`id`))
+
+-----------------------
