@@ -49,16 +49,16 @@ REFERENCES table2_name (primarykey table2);
 ----------------------------------------------
 -------------- ADD FOREIGN KEYS --------------
 
+---------------- OPDRACHT 2 ------------------
+
 -- In table mhl_districts missing FK country_ID (mhl_countries):
 ALTER TABLE mhl_districts ADD CONSTRAINT country_ID FOREIGN KEY (country_ID) REFERENCES mhl_countries (id);
 SUCCESS! 
-
 -----------------------
 
 -- In table mhl_communes missing FK district_ID (mhl_districts):
 ALTER TABLE mhl_communes ADD CONSTRAINT district_ID FOREIGN KEY (district_ID) REFERENCES mhl_districts (id);
 SUCCESS! 
-
 -----------------------
 
 -- In table mhl_cities missing FK commune_ID (mhl_communes):
@@ -91,13 +91,11 @@ WHERE commune_ID = 755 OR commune_ID = 0;
 -- Try FK again
 ALTER TABLE mhl_cities ADD CONSTRAINT commune_ID FOREIGN KEY (commune_ID) REFERENCES mhl_communes (id);
 SUCCESS!
-
 -----------------------
 
 -- in table mhl_detaildefs missing FK group_id (mhl_detailgroups):
 ALTER TABLE mhl_detaildefs ADD CONSTRAINT group_id FOREIGN KEY (group_ID) REFERENCES mhl_detailgroups (id);
 SUCCESS!
-
 -----------------------
 
 -- in table mhl_detaildefs missing FK propertytype_id (mhl_propertytypes):
@@ -105,6 +103,35 @@ ALTER TABLE mhl_detaildefs ADD CONSTRAINT propertytype_ID FOREIGN KEY (propertyt
 FAILED
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-6ac_5e9`, CONSTRAINT `propertytype_ID` FOREIGN KEY (`propertytype_ID`) REFERENCES `mhl_propertytypes` (`id`))
 
+-- geplaatste foreign key in mhl_detaildefs komt niet overeen met de propertytype_ID
+Data is incompleet, vandaar dat foreign key niet werkt. 
+
+-- Foreign key verwijderen:
+ALTER TABLE mhl_detaildefs
+DROP FOREIGN KEY propertytype_ID;
+FAILED
+#1091 - Cant DROP propertytype_ID; check that column/key exists
+
+-- Dan eerst data controleren:
+SELECT propertytype_ID FROM mhl_detaildefs WHERE propertytype_ID NOT IN (SELECT ID FROM mhl_propertytypes);
+(18 rows)
+
+-- Nieuwe tabel met false data:
+CREATE TABLE data_detaildefs_propertytypes
+SELECT * FROM mhl_detaildefs 
+WHERE propertytype_ID NOT IN (SELECT ID FROM mhl_propertytypes);
+
+-- Delete false data from mhl_detaildefs:
+DELETE FROM mhl_detaildefs
+WHERE propertytype_ID NOT IN (SELECT ID FROM mhl_propertytypes);
+(18 rows affected)
+
+-- Checking relations in table mhl_detaildefs:
+Only shows group_id as a FK, not the propertytype_ID. Although it shows in the structure that propertytype_ID should be a FK.
+
+-- Had to drop propertytype_ID INDEX (table structures -> go below first table -> INDEXES) to be able to create a new FK
+
+---!!! TIP: use FK_ before constraints to show the constraint is about a foreign key.
 -----------------------
 
 -- in table mhl_suppliers missing FK city_ID (mhl_cities):
@@ -129,10 +156,57 @@ WHERE city_id NOT IN (SELECT ID FROM mhl_cities);
 -- Try FK again:
 ALTER TABLE mhl_suppliers ADD CONSTRAINT city_ID FOREIGN KEY (city_ID) REFERENCES mhl_cities (id);
 SUCCESS!
- -----------------------
+-----------------------
 
 -- in table mhl_suppliers missing FK p_city_ID (mhl_cities):
+ALTER TABLE mhl_suppliers ADD CONSTRAINT p_city_ID FOREIGN KEY (p_city_ID) REFERENCES mhl_cities (id);
 FAILED
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-32c_4f`, CONSTRAINT `p_city_ID` FOREIGN KEY (`p_city_ID`) REFERENCES `mhl_cities` (`id`))
 
+-- select rows of p_city_ID
+SELECT p_city_ID FROM mhl_suppliers WHERE p_city_ID NOT IN (SELECT ID FROM mhl_cities);
+
+-- selects the distinct rows of p_city_id
+SELECT DISTINCT p_city_ID FROM mhl_suppliers WHERE p_city_ID NOT IN (SELECT ID FROM mhl_cities);
+
+-- create a new table with false data from mhl_suppliers
+CREATE TABLE data_suppliers_pcityid
+SELECT * FROM mhl_suppliers
+WHERE p_city_ID NOT IN (SELECT ID FROM mhl_cities);
+6908
+
+-- delete false data from mhl_suppliers
+DELETE FROM mhl_suppliers
+WHERE p_city_ID NOT IN (SELECT ID FROM mhl_cities);
+6908 rows affected
+
+-- did not see the new table. Had to delete table mhl_suppliers and create table anew along with inserting the data from mhl.sql (opened in mysql workbench)
+
+-- Try FK again:
+ALTER TABLE mhl_suppliers ADD CONSTRAINT p_city_ID FOREIGN KEY (p_city_ID) REFERENCES mhl_cities (id);
+SUCCESS!
+-----------------------
+
+-- in table mhl_suppliers missing FK membertypes (mhl_membertypes):
+ALTER TABLE mhl_suppliers ADD CONSTRAINT membertype FOREIGN KEY (membertype) REFERENCES mhl_membertypes (id);
+FAILED
+#1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-32c_591`, CONSTRAINT `membertype` FOREIGN KEY (`membertype`) REFERENCES `mhl_membertypes` (`id`))
+
+-- select rows in mhl_suppliers which do not occur in mhl_membertypes:
+SELECT membertype FROM mhl_suppliers WHERE membertype NOT IN (SELECT ID FROM mhl_membertypes);
+returns: membertype = 0
+
+-- create table to refer false data to:
+CREATE TABLE data_suppliers_membertypes
+SELECT * FROM mhl_suppliers
+WHERE membertype NOT IN (SELECT ID FROM mhl_membertypes);
+
+-- delete false data from table mhl_suppliers:
+DELETE FROM mhl_suppliers
+WHERE membertype NOT IN (SELECT ID FROM mhl_membertypes);
+3 rows affected.
+
+-- try FK again:
+ALTER TABLE mhl_suppliers ADD CONSTRAINT membertype FOREIGN KEY (membertype) REFERENCES mhl_membertypes (id);
+SUCCESS
 -----------------------
