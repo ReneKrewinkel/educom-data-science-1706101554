@@ -55,31 +55,36 @@ SUCCESS!
 ALTER TABLE mhl_communes ADD CONSTRAINT district_ID FOREIGN KEY (district_ID) REFERENCES mhl_districts (id);
 SUCCESS! 
 
-
-
 -- In table mhl_cities missing FK commune_ID (mhl_communes):
 ALTER TABLE mhl_cities ADD CONSTRAINT commune_ID FOREIGN KEY (commune_ID) REFERENCES mhl_communes (id);
 FAILED 
 #1452 - Cannot add or update a child row: a foreign key constraint fails (`mhl`.`#sql-6ac_559`, CONSTRAINT `commune_ID` FOREIGN KEY (`commune_ID`) REFERENCES `mhl_communes` (`id`))
 
+-- Thoughts to find false data
 SELECT commune_ID FROM mhl_cities WHERE commune_ID IS NULL; --empty result set (zero rows)
 SELECT id FROM mhl_communes WHERE id IS NULL; --empty result set (zero rows)
 
+-- This selects all rows with the same data, that's not what I need.
 SELECT mhl_cities.*, mhl_communes.* FROM mhl_cities INNER JOIN mhl_communes ON mhl_cities.commune_ID = mhl_communes.id;
 
 -- TRY:
+-- This selects all rows where the commune_id from mhl_cities is not present in the mhl_communes ID row:
 SELECT commune_ID FROM mhl_cities WHERE commune_ID NOT IN (SELECT ID FROM mhl_communes);
 SUCCESS! results: 755 and 0
 
+-- Create a new table with false data from mhl_cities
 CREATE TABLE data_cities_communes
 SELECT * FROM mhl_cities 
 WHERE commune_ID = 755 OR commune_ID = 0;
 
+-- Delete false data from mhl_cities
+DELETE FROM mhl_cities
+WHERE commune_ID = 755 OR commune_ID = 0; 
+(215 rows affected)
 
-
--- verplaats data dat niet in de tabel hoort (foutieve data) naar een aparte tabel zoals voorbeeld hieronder:
-create table x  select * from mhl_hitcount where year = 2013
-
+-- Try FK again
+ALTER TABLE mhl_cities ADD CONSTRAINT commune_ID FOREIGN KEY (commune_ID) REFERENCES mhl_communes (id);
+SUCCESS!
 
 
 
