@@ -81,3 +81,17 @@ JOIN mhl_propertytypes
 ON mhl_yn_properties.propertytype_ID = mhl_propertytypes.ID 
 WHERE mhl_propertytypes.name = 'specialistische leverancier' 
 OR mhl_propertytypes.name = 'ook voor particulieren';
+
+--4.1.5
+-- Selecteer de naam, straat, huisnummer, postcode en geo-locatie van de 5 meest noordelijk gelegen leveranciers.
+-- naam, straat, huisnummer, postcode = mhl_suppliers
+-- geo-location: latitude + longitude = pc_lat_long (waar pc6 = postcode)
+-- top 5
+-- meest noordelijk: latitude = dichterbij 90 dan 0
+
+SELECT mhl_suppliers.name, mhl_suppliers.straat, mhl_suppliers.huisnr, mhl_suppliers.postcode, pc_lat_long.lat, pc_lat_long.lng
+FROM mhl_suppliers 
+JOIN pc_lat_long 
+ON pc_lat_long.pc6 = mhl_suppliers.postcode 
+ORDER BY pc_lat_long.lat DESC 
+LIMIT 5;
