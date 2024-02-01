@@ -68,3 +68,16 @@ ON mhl_suppliers.city_ID = mhl_cities.ID
 WHERE mhl_cities.name="Amsterdam" AND (mhl_rubrieken.name="drank" OR mhl_rubrieken.name="drank")
 
 ORDER BY mhl_rubrieken.name, mhl_suppliers.name
+
+
+-- 4.1.4
+-- Selecteer de naam, straat, huisnummer en postcode van alle leveranciers die 'specialistische leverancier' zijn of 'ook voor particulieren' werken
+-- mhl_yn_propertytypes has supplier_ID and propertytype_ID
+SELECT mhl_suppliers.name, mhl_suppliers.straat, mhl_suppliers.huisnr, mhl_suppliers.postcode 
+FROM mhl_yn_properties 
+JOIN mhl_suppliers 
+ON mhl_yn_properties.supplier_ID = mhl_suppliers.ID 
+JOIN mhl_propertytypes 
+ON mhl_yn_properties.propertytype_ID = mhl_propertytypes.ID 
+WHERE mhl_propertytypes.name = 'specialistische leverancier' 
+OR mhl_propertytypes.name = 'ook voor particulieren';
