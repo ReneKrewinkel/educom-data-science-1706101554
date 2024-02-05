@@ -140,3 +140,86 @@ WHERE
 mhl_hitcount.month = 1 
 AND mhl_hitcount.year = 2014
 AND mhl_districts.name IN ('Zeeland', 'Noord-Brabant', 'Limburg');
+
+-- 4.1.7 
+-- Selecteer de plaatsnamen en id en gemeente id's van steden met dezelfde naam, gesorteerd op plaatsnaam.
+mhl_cities: [ID], [commune_ID], [name]
+mhl_communes: [ID], [district_ID], [name]
+
+
+SELECT
+mhl_cities.name,
+mhl_cities.ID,
+mhl_communes.ID
+
+FROM 
+mhl_cities
+INNER JOIN
+mhl_communes ON mhl_communes.ID = mhl_cities.commune_ID
+WHERE 
+mhl_cities.name = mhl_communes.name
+
+ORDER BY mhl_cities.name;
+
+
+-- 4.2.1
+
+-- Selecteer naam en gemeente ID van plaatsen zonder geldige gemeente
+-- Wat is een niet-geldige gemeente?
+
+ZIE MHL_aangepast -> data_cities_communes. 
+
+-- 4.2.2
+-- Selecteer naam van de plaats en naam van de gemeente, wanneer gemeentenaam niet geldig dan 'INVALID' als waarde.
+-- ? WHERE mhl_communes.name IS NULL OR (mhl_communes.name = '');
+
+SELECT 
+mhl_cities.name
+mhl_communes.name
+FROM 
+mhl_cities
+JOIN mhl_communes ON mhl_cities.commune_ID;
+WHERE mhl_communes.name IS NULL OR (mhl_communes.name = '');
+
+--> NO OUTPUT
+
+-- The MySQL IFNULL() function lets you return an alternative value if an expression is NULL:
+-- SELECT ProductName, UnitPrice * (UnitsInStock + IFNULL(UnitsOnOrder, 0))
+-- FROM Products;
+
+-- QUERY met output SELECT IFNULL (mhl_communes.name, 'INVALID') AS result FROM mhl_cities;
+
+SELECT
+mhl_cities.name,
+IFNULL (mhl_communes.name, 'INVALID')
+
+FROM mhl_cities
+JOIN mhl_communes ON mhl_communes.ID = mhl_cities.commune_ID; 
+
+
+-- 4.2.3 Selecteer alle hoofdrubrieken met hun subrubrieken, alfabetisch gesorteerd op hoofdrubriek en daarbinnen op subrubriek.
+-- SELF REFERENCE (Foreign KEY and Primary Key in the same table)
+
+mhl_rubrieken (ID, parent, display_order, name)
+Rubriek_Id met parent rubriek = subrubriek
+
+ORDER BY hoofdrubriek. ORDER BY subrubriek
+
+SELECT 
+mhl_rubrieken.ID AS hoofdrubrieken,
+mhl_rubrieken.parent AS subrubrieken,
+mhl_rubrieken.name
+
+FROM 
+mhl_rubrieken PARENT
+
+ORDER BY
+hoofdrubrieken, subrubrieken ASC;
+
+SELECT
+RC.ID,
+IFNULL(RP.name, RC.name) AS hoofdrubrieken,
+IF(ISNULL(RP.name), '', RC.name) AS subrubrieken
+FROM mhl_rubrieken RC
+LEFT JOIN mhl_rubrieken RP ON RC.parent = RP.ID
+ORDER BY hoofdrubrieken, subrubrieken ASC;
