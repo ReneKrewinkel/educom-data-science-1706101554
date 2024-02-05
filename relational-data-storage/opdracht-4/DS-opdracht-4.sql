@@ -59,7 +59,6 @@ ON mhl_suppliers_mhl_rubriek_view.mhl_suppliers_ID = mhl_suppliers.ID
 INNER JOIN mhl_rubrieken 
 ON mhl_suppliers_mhl_rubriek_view.mhl_rubriek_view_ID = mhl_rubrieken.ID
 
-/* optioneel dus left */
 LEFT JOIN  mhl_rubrieken 
 ON mhl_rubrieken.parent = mhl_rubrieken.ID
 INNER JOIN mhl_cities
@@ -73,6 +72,7 @@ ORDER BY mhl_rubrieken.name, mhl_suppliers.name
 -- 4.1.4
 -- Selecteer de naam, straat, huisnummer en postcode van alle leveranciers die 'specialistische leverancier' zijn of 'ook voor particulieren' werken
 -- mhl_yn_propertytypes has supplier_ID and propertytype_ID
+
 SELECT mhl_suppliers.name, mhl_suppliers.straat, mhl_suppliers.huisnr, mhl_suppliers.postcode 
 FROM mhl_yn_properties 
 JOIN mhl_suppliers 
@@ -117,7 +117,7 @@ SELECT mhl_suppliers.name, mhl_cities.name, mhl_communes.name, mhl_districts.nam
 SELECT * FROM mhl_districts
 WHERE mhl_districts.name ='Zeeland', 'Noord-Brabant', 'Limburg'
 
-
+--------------------------
 
 SELECT
 mhl_hitcount.*,
@@ -189,6 +189,8 @@ WHERE mhl_communes.name IS NULL OR (mhl_communes.name = '');
 
 -- QUERY met output SELECT IFNULL (mhl_communes.name, 'INVALID') AS result FROM mhl_cities;
 
+--------------------------
+
 SELECT
 mhl_cities.name,
 IFNULL (mhl_communes.name, 'INVALID')
@@ -216,6 +218,8 @@ mhl_rubrieken PARENT
 ORDER BY
 hoofdrubrieken, subrubrieken ASC;
 
+--------------------------
+
 SELECT
 RC.ID,
 IFNULL(RP.name, RC.name) AS hoofdrubrieken,
@@ -223,3 +227,49 @@ IF(ISNULL(RP.name), '', RC.name) AS subrubrieken
 FROM mhl_rubrieken RC
 LEFT JOIN mhl_rubrieken RP ON RC.parent = RP.ID
 ORDER BY hoofdrubrieken, subrubrieken ASC;
+
+
+
+-- 4.2.4 Selecteer alle mogelijke Y/N-properties van leveranciers uit Amsterdam, met indien aanwezig de waarde van de property voor deze leverancier en anders 'NOT SET'.
+
+mhl_yn_properties [ID, supplier_ID, propertytype_ID, content(Y/N or empty)]
+mhl_suppliers [ID, membertype, company, name, straat, huisnr, postcode, city_ID, p_address, p_postcode, p_city_ID]
+mhl_cities [ID, commune_ID, name]
+mhl_propertytypes [ID, csvreg, name, proptype, display, is_filter]
+
+VALUE of property = Y, N or 'NOT SET' (empty in table mhl_yn_properties -> content)
+
+SELECT *
+FROM mhl_cities 
+WHERE name = 'Amsterdam'
+-- City_ID = 104, commune_ID = 5, name = amsterdam
+
+
+--------------------------
+
+SELECT 
+mhl_suppliers.name,
+mhl_propertytypes.name,
+mhl_yn_properties.content,
+
+IF(mhl_yn_properties.content IN('Y','N'), mhl_yn_properties.content, 'NOT SET') AS content_status
+
+FROM 
+mhl_yn_properties
+
+JOIN
+mhl_propertytypes
+ON mhl_yn_properties.propertytype_ID = mhl_propertytypes.ID
+
+JOIN
+mhl_suppliers
+ON mhl_yn_properties.supplier_ID = mhl_suppliers.ID
+
+JOIN
+mhl_cities
+ON mhl_cities.ID = mhl_suppliers.city_ID
+
+WHERE 
+mhl_cities.name = 'amsterdam';
+-- 217 results
+-- Lower case city_id
