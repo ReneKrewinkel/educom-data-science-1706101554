@@ -95,3 +95,48 @@ JOIN pc_lat_long
 ON pc_lat_long.pc6 = mhl_suppliers.postcode 
 ORDER BY pc_lat_long.lat DESC 
 LIMIT 5;
+
+-- 4.1.6
+-- Selecteer de hitcount in januari 2014,
+-- leveranciersnaam, plaatsnaam, gemeentenaam, provincienaam van de leveranciers uit de provincies 'beneden de grote rivieren'
+
+mhl_hitcount: [supplier_ID], year, month, hitcount
+mhl_suppliers: [ID], membertype, company, [name], straat, huisnr, postcode, [city_ID], p_address, p_postcode, p_city_ID
+mhl_cities: [ID], [commune_ID], [name]
+mhl_communes: [ID], [district_ID], [name]
+mhl_districts: [ID], [country_ID], code, [name], display_order
+
+provincies beneden de grote rivieren: ZEELAND, NOORD-BRABANT, LIMBURG
+
+SELECT * FROM mhl_hitcount 
+WHERE month = 1
+AND year = 2014;
+
+SELECT mhl_suppliers.name, mhl_cities.name, mhl_communes.name, mhl_districts.name
+
+SELECT * FROM mhl_districts
+WHERE mhl_districts.name ='Zeeland', 'Noord-Brabant', 'Limburg'
+
+
+
+SELECT
+mhl_hitcount.*,
+mhl_suppliers.name,
+mhl_cities.name,
+mhl_communes.name,
+mhl_districts.name
+FROM
+mhl_suppliers
+INNER JOIN
+mhl_cities ON mhl_cities.ID = mhl_suppliers.city_ID
+INNER JOIN
+mhl_communes ON mhl_communes.ID = mhl_cities.commune_ID
+INNER JOIN 
+mhl_districts ON mhl_districts.ID = mhl_communes.district_ID
+
+INNER JOIN
+mhl_hitcount ON mhl_suppliers.ID = mhl_hitcount.supplier_ID 
+WHERE 
+mhl_hitcount.month = 1 
+AND mhl_hitcount.year = 2014
+AND mhl_districts.name IN ('Zeeland', 'Noord-Brabant', 'Limburg');
