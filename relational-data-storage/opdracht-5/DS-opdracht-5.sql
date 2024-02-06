@@ -39,3 +39,18 @@ mhl_hitcount
 
 GROUP BY year; -- distinct year
 
+-- 5.1.3 Selecteer uit de hitcount-tabel per jaar, per maand het aantal records, de minimale, maximale, gemiddelde en totale hitcount
+
+SELECT
+year,
+month,
+COUNT(mhl_hitcount.hitcount) AS headcount,
+MIN(mhl_hitcount.hitcount) AS min_hitcount,
+MAX(mhl_hitcount.hitcount) AS max_hitcount,
+AVG(mhl_hitcount.hitcount) AS avg_hitcount, 
+SUM(mhl_hitcount.hitcount) AS sum_hitcount
+
+FROM
+mhl_hitcount
+
+GROUP BY year, month;
