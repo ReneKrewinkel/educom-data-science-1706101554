@@ -70,8 +70,8 @@ mhl_hitcount.supplier_ID = mhl_suppliers.ID;
 SELECT
 mhl_suppliers.name,
 SUM(mhl_hitcount.hitcount) AS sum_hitcount,
-COUNT(DISTINCT mhl_hitcount.month) AS headcount_month,
-AVG(mhl_hitcount.hitcount) AS avg_hitcount 
+COUNT(mhl_hitcount.month) AS total_months,
+ROUND(AVG(mhl_hitcount.hitcount)) AS avg_hitcount
 FROM mhl_hitcount
 INNER JOIN 
 mhl_suppliers
@@ -79,3 +79,4 @@ ON
 mhl_hitcount.supplier_ID = mhl_suppliers.ID
 GROUP BY
 mhl_suppliers.name;
+-- SUCCES (had to ROUND the AVG to match the example of the exercise)
