@@ -248,28 +248,21 @@ WHERE name = 'Amsterdam'
 --------------------------
 
 SELECT 
-mhl_suppliers.name,
-mhl_propertytypes.name,
-mhl_yn_properties.content,
+mhl_suppliers.name, 
+mhl_propertytypes.name, 
+mhl_yn_properties.content, 
+mhl_propertytypes.proptype, 
+IF(mhl_yn_properties.content IN('Y','N'), mhl_yn_properties.content, 'NOT SET') AS content_status 
 
-IF(mhl_yn_properties.content IN('Y','N'), mhl_yn_properties.content, 'NOT SET') AS content_status
+FROM mhl_yn_properties 
+JOIN mhl_propertytypes 
+ON mhl_yn_properties.propertytype_ID = mhl_propertytypes.ID 
 
-FROM 
-mhl_yn_properties
+JOIN mhl_suppliers 
+ON mhl_yn_properties.supplier_ID = mhl_suppliers.ID 
 
-JOIN
-mhl_propertytypes
-ON mhl_yn_properties.propertytype_ID = mhl_propertytypes.ID
+JOIN mhl_cities 
+ON mhl_cities.ID = mhl_suppliers.city_ID 
 
-JOIN
-mhl_suppliers
-ON mhl_yn_properties.supplier_ID = mhl_suppliers.ID
-
-JOIN
-mhl_cities
-ON mhl_cities.ID = mhl_suppliers.city_ID
-
-WHERE 
-mhl_cities.name = 'amsterdam';
--- 217 results
--- Lower case city_id
+WHERE mhl_cities.name = 'amsterdam' 
+AND mhl_propertytypes.proptype = "A";
