@@ -356,6 +356,141 @@ ORDER BY provincie, stad, leverancier;
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+-- 5.2.2 Selecteer het aantal Gold, Silver, Bronze en Overige Suppliers per stad, aflopend gesorteerd op Gold, Silver, Bronze, Other.
+
+mhl_membertypes: [ID, name, sort_order, ulevel]
+GOLD: ID=1
+Silver: ID=2
+Bronze: ID=3
+Other: ID=4-10
+
+mhl_suppliers: [ID, membertype, company, name, straat, huisnr, postcode, city_ID, p_address, p_postcode, p_city_ID]
+
+mhl_cities: [ID, commune_ID, name]
+
+-- aflopend gesorteerd op Gold, Silver, Bronze, Other.
+ORDER BY Gold, Silver, Bronze, Other
 
 
+-- aantal Gold, Silver, Bronze, Overig
 
+SELECT
+mhl_suppliers.membertype,
+COUNT(*)
+FROM 
+mhl_suppliers
+GROUP BY
+mhl_suppliers.membertype;
+
+
+SELECT
+mhl_cities.name
+
+FROM 
+mhl_suppliers
+
+INNER JOIN 
+mhl_cities
+ON mhl_cities.ID = mhl_suppliers.city_ID;
+
+--ORDER BY Gold, Silver, Bronze, Other
+
+-----
+
+SELECT
+mhl_cities.name,
+mhl_suppliers.membertype,
+
+COUNT(*)
+FROM 
+mhl_suppliers
+
+INNER JOIN 
+mhl_cities
+ON mhl_cities.ID = mhl_suppliers.city_ID
+
+GROUP BY
+mhl_cities.name, mhl_suppliers.membertype;
+
+-- ORDER BY Gold, Silver, Bronz, Other
+
+------
+
+SELECT
+mhl_cities.name,
+mhl_suppliers.membertype,
+mhl_membertypes.name,
+
+COUNT(*)
+FROM 
+mhl_suppliers
+
+INNER JOIN 
+mhl_cities
+ON mhl_cities.ID = mhl_suppliers.city_ID
+
+INNER JOIN
+mhl_membertypes
+ON mhl_membertypes.ID = mhl_suppliers.membertype
+
+GROUP BY
+mhl_cities.name, mhl_suppliers.membertype;
+
+--ORDER BY Gold, Silver, Bronze, Other
+
+-- HOW TO USE DATA FROM COLUMN AS A COLUMN ITSELF?
+-- HOW TO DIFFER BETWEEN membertype_ID = 1 OR 2 OR 3 OR OTHER?
+-- HOW TO COUNT GOLD/CITY SILVER/CITY/ BRONZE/CITY/ OTHER/CITY? COUNT(*) IS NOT THE WAY TO GO. NEED TO SPECIFY WHAT TO COUNT
+
+
+-------
+SELECT
+    mhl_cities.name AS Stad,
+    COUNT(CASE WHEN mhl_membertypes.name = 'Gold' THEN 1 ELSE NULL)END AS GOLD
+FROM
+    mhl_suppliers
+INNER JOIN
+    mhl_cities ON mhl_cities.ID = mhl_suppliers.city_ID
+INNER JOIN
+    mhl_membertypes ON mhl_membertypes.ID = mhl_suppliers.membertype
+GROUP BY
+    mhl_cities.name
+ORDER BY
+    GOLD DESC;
+
+-- FAIL : error COUNT(CASE WHEN mhl_membertypes.name = 'Gold' THEN 1 ELSE NULL)END AS GOLD. 'END' keyword is part of the CASE syntax not used to form the alias (END AS) it should be just 'AS'
+ELECT
+    mhl_cities.name AS Stad,
+    COUNT(CASE WHEN mhl_membertypes.name = 'Gold' THEN 1 ELSE NULL)END AS GOLD
+FROM
+    mhl_suppliers
+INNER JOIN
+    mhl_cities ON mhl_cities.ID = mhl_suppliers.city_ID
+INNER JOIN
+    mhl_membertypes ON mhl_membertypes.ID = mhl_suppliers.membertype
+GROUP BY
+    mhl_cities.name
+ORDER BY
+    GOLD DESC;
+----- SUCCES FOR GOLD
+----- 
+
+SELECT
+    mhl_cities.name AS Stad,
+    COUNT(CASE WHEN mhl_membertypes.name = 'Gold' THEN 1 ELSE NULL END) AS GOLD,
+    COUNT(CASE WHEN mhl_membertypes.name = 'Silver' THEN 1 ELSE NULL END) AS SILVER,
+    COUNT(CASE WHEN mhl_membertypes.name = 'Bronze' THEN 1 ELSE NULL END) AS BRONZE,
+    COUNT(CASE WHEN mhl_membertypes.name NOT IN ('Gold', 'Silver', 'Bronze') THEN 1 ELSE NULL END) AS OTHER ---- Keep track of the brackets
+FROM
+    mhl_suppliers
+INNER JOIN
+    mhl_cities ON mhl_cities.ID = mhl_suppliers.city_ID
+INNER JOIN
+    mhl_membertypes ON mhl_membertypes.ID = mhl_suppliers.membertype
+GROUP BY
+    mhl_cities.name
+ORDER BY
+    GOLD DESC, SILVER DESC, BRONZE DESC, OTHER DESC;
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
