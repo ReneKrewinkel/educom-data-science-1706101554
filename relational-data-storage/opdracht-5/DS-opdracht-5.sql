@@ -412,7 +412,7 @@ ON mhl_cities.ID = mhl_suppliers.city_ID
 GROUP BY
 mhl_cities.name, mhl_suppliers.membertype;
 
--- ORDER BY Gold, Silver, Bronz, Other
+-- ORDER BY Gold, Silver, Bronze, Other
 
 ------
 
@@ -472,7 +472,7 @@ GROUP BY
     mhl_cities.name
 ORDER BY
     GOLD DESC;
------ SUCCES FOR GOLD
+----- SUCCESS FOR GOLD
 ----- 
 
 SELECT
@@ -493,4 +493,52 @@ ORDER BY
     GOLD DESC, SILVER DESC, BRONZE DESC, OTHER DESC;
 
 
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 5.2.3 Selecteer een overzicht van de totale hitcount per jaar.
+-----Columns:
+-- Jaar 
+-- Eerste kwartaal (maand 1,2,3)
+-- Tweede kwartaal (maand 4,5,6)
+-- Derde kwartaal (maand 7,8,9)
+-- Vierde kwartaal (maand 10,11,12)
+-- Totaal
+
+-- COUNT(mhl_hitcount.hitcount) AS headcount, -- aantal records
+-- MIN(mhl_hitcount.hitcount) AS min_hitcount, -- minimale hitcount
+-- MAX(mhl_hitcount.hitcount) AS max_hitcount, -- maximale hitcount
+-- AVG(mhl_hitcount.hitcount) AS avg_hitcount, -- gemiddelde hitcount
+-- SUM(mhl_hitcount.hitcount) AS sum_hitcount -- totale hitcount
+
+----- Tables
+-- mhl_hitcount [supplier_ID, year, month, hitcount]
+
+
+SELECT
+mhl_hitcount.year,
+
+SUM(mhl_hitcount.hitcount) AS Totaal
+
+COUNT(CASE WHEN mhl_hitcount.month = '1' AND '2' AND '3' END)AS Eerste kwartaal --- DO not use AND. Can use OR, or separte with commas 
+
+FROM 
+mhl_hitcount
+
+GROUP BY year; ---- mhl_hitcount.year
+
+----- 
+
+SELECT
+    mhl_hitcount.year AS Jaar,
+
+    SUM(CASE WHEN mhl_hitcount.month IN ('1', '2', '3') THEN hitcount ELSE 0 END) AS 'Eerste kwartaal',
+    SUM(CASE WHEN mhl_hitcount.month IN ('4', '5', '6') THEN hitcount ELSE 0 END) AS 'Tweede kwartaal',
+    SUM(CASE WHEN mhl_hitcount.month IN ('7', '8', '9') THEN hitcount ELSE 0 END) AS 'Derde kwartaal',
+    SUM(CASE WHEN mhl_hitcount.month IN ('10', '11', '12') THEN hitcount ELSE 0 END) AS 'Vierde kwartaal',
+        SUM(mhl_hitcount.hitcount) AS Totaal
+FROM 
+    mhl_hitcount
+GROUP BY
+    mhl_hitcount.year;
 ---------------------------------------------------------------------------------------------------------------------------------------
