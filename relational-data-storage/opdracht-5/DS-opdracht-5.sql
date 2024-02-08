@@ -553,27 +553,28 @@ SELECT
 mhl_contacts.supplier_ID,
 mhl_contacts.name AS contact,
 mhl_departments.name AS department
+contacttype AS functie
 FROM mhl_contacts
 
 INNER JOIN mhl_departments
 ON mhl_departments.ID = mhl_contacts.department
 
-WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
+WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype LIKE '%directeur%';
 
 -- CREATE VIEW OF (WORKING) QUERY
 
-CREATE VIEW v_directie
-AS 
 SELECT 
 mhl_contacts.supplier_ID,
 mhl_contacts.name AS contact,
-mhl_departments.name AS department
+mhl_departments.name AS department,
+contacttype AS functie  -- Forgot contacttype AS functie
+
 FROM mhl_contacts
 
 INNER JOIN mhl_departments
 ON mhl_departments.ID = mhl_contacts.department
 
-WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
+WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype LIKE '%directeur%';
 
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -640,3 +641,48 @@ mhl_cities
 ON mhl_cities.ID = mhl_suppliers.city_ID;
 
 ---------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 5.3.3 Maak nu met behulp van deze views een query voor een verzendlijst
+
+--Tabel: mhl_suppliers.name, contact OF tav directie, adres, postcode, stad
+
+CREATE VIEW v_directie
+AS 
+SELECT 
+mhl_contacts.supplier_ID,
+mhl_contacts.name AS contact,
+mhl_departments.name AS department
+FROM mhl_contacts
+
+INNER JOIN mhl_departments
+ON mhl_departments.ID = mhl_contacts.department
+
+WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
+
+
+CREATE VIEW v_verzendlijst
+AS
+SELECT
+mhl_suppliers.ID,
+
+CASE
+WHEN mhl_suppliers.p_address <> '' 
+THEN mhl_suppliers.p_address
+ELSE mhl_suppliers.straat + mhl_suppliers.huisnr
+END AS adres,
+
+CASE 
+WHEN mhl_suppliers.p_postcode <> ''
+THEN mhl_suppliers.p_postcode
+ELSE mhl_suppliers.postcode
+END AS postcode,
+
+mhl_cities.name AS stad 
+
+FROM 
+mhl_suppliers
+
+JOIN
+mhl_cities 
+ON mhl_cities.ID = mhl_suppliers.city_ID;
