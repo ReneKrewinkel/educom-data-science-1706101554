@@ -580,7 +580,7 @@ WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype LIKE '%direc
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 
---5.3.2 Maak een view 'VERZENDLIJST'
+--5.3.2 Maak een view POSTADRES (In opdracht staat verzendlijst)
 
 -- mhl_suppliers: [ID, membertype, company, name, straat, huisnr, postcode, city_ID, p_address, p_postcode, p_city_ID]
 -- mhl_cities: [ID, commune_ID, name]
@@ -593,7 +593,7 @@ mhl_suppliers.ID,
 CASE
 WHEN mhl_suppliers.p_address <> '' 
 THEN mhl_suppliers.p_address
-ELSE mhl_suppliers.straat + mhl_suppliers.huisnr
+ELSE CONCAT(mhl_suppliers.straat, '', mhl_suppliers.huisnr)
 END AS adres,
 
 CASE 
@@ -647,21 +647,30 @@ ON mhl_cities.ID = mhl_suppliers.city_ID;
 
 --Tabel: mhl_suppliers.name, contact OF tav directie, adres, postcode, stad
 
+
+-- VIEWS
+
+
 CREATE VIEW v_directie
 AS 
 SELECT 
 mhl_contacts.supplier_ID,
 mhl_contacts.name AS contact,
-mhl_departments.name AS department
+mhl_departments.name AS department,
+contacttype AS functie
+
 FROM mhl_contacts
 
 INNER JOIN mhl_departments
 ON mhl_departments.ID = mhl_contacts.department
 
-WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
+WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype LIKE '%directeur%';
 
 
-CREATE VIEW v_verzendlijst
+-- AND
+
+
+CREATE VIEW v_postadres
 AS
 SELECT
 mhl_suppliers.ID,
@@ -669,7 +678,7 @@ mhl_suppliers.ID,
 CASE
 WHEN mhl_suppliers.p_address <> '' 
 THEN mhl_suppliers.p_address
-ELSE mhl_suppliers.straat + mhl_suppliers.huisnr
+ELSE CONCAT(mhl_suppliers.straat, '', mhl_suppliers.huisnr)
 END AS adres,
 
 CASE 
@@ -686,3 +695,31 @@ mhl_suppliers
 JOIN
 mhl_cities 
 ON mhl_cities.ID = mhl_suppliers.city_ID;
+ 
+
+-- QUERY
+
+-- v_directie: [supplier.ID, contact, department, functie]
+-- v_postadres: [ID, adres, postcode, stad]
+
+SELECT
+mhl_suppliers.name AS naam,
+IF (v_directie.contact <> '', v_directie.contact, 'tav directie') AS contact,
+v_postadres.adres AS adres,
+v_postadres.postcode AS postcode,
+v_postadres.stad AS stad
+
+FROM 
+mhl_suppliers
+
+JOIN
+v_postadres
+ON v_postadres.ID = mhl_suppliers.ID
+
+LEFT JOIN
+v_directie
+ON v_directie.supplier_ID = mhl_suppliers.ID;
+
+---- Had to solve issues in v_postadres in the CONCAT statement. Be aware of commas and proper syntax. + is not used!
+---- USED LEFT JOIN to show all suppliers, whether or not there a contact (as stated in the IF(v_directie.contact <> '', v_directie.contact, 'tav directie') AS contact,)) which resulted in 8588 results.
+---- With INNER JOIN it would only show results with present 'directie' known by name (contact)
