@@ -575,4 +575,68 @@ ON mhl_departments.ID = mhl_contacts.department
 
 WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
 
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+--5.3.2 Maak een view 'VERZENDLIJST'
+
+-- mhl_suppliers: [ID, membertype, company, name, straat, huisnr, postcode, city_ID, p_address, p_postcode, p_city_ID]
+-- mhl_cities: [ID, commune_ID, name]
+
+
+
+SELECT
+mhl_suppliers.ID,
+
+CASE
+WHEN mhl_suppliers.p_address <> '' 
+THEN mhl_suppliers.p_address
+ELSE mhl_suppliers.straat + mhl_suppliers.huisnr
+END AS adres,
+
+CASE 
+WHEN mhl_suppliers.p_postcode <> ''
+THEN mhl_suppliers.p_postcode
+ELSE mhl_suppliers.postcode
+END AS postcode,
+
+mhl_cities.name AS stad 
+
+FROM 
+mhl_suppliers
+
+JOIN
+mhl_cities 
+ON mhl_cities.ID = mhl_suppliers.city_ID;
+
+
+------ CREATE VIEW OF WORKING QUERY
+
+CREATE VIEW v_verzendlijst
+AS
+SELECT
+mhl_suppliers.ID,
+
+CASE
+WHEN mhl_suppliers.p_address <> '' 
+THEN mhl_suppliers.p_address
+ELSE mhl_suppliers.straat + mhl_suppliers.huisnr
+END AS adres,
+
+CASE 
+WHEN mhl_suppliers.p_postcode <> ''
+THEN mhl_suppliers.p_postcode
+ELSE mhl_suppliers.postcode
+END AS postcode,
+
+mhl_cities.name AS stad 
+
+FROM 
+mhl_suppliers
+
+JOIN
+mhl_cities 
+ON mhl_cities.ID = mhl_suppliers.city_ID;
+
 ---------------------------------------------------------------------------------------------------------------------------------------
