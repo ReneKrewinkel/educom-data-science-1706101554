@@ -723,3 +723,19 @@ ON v_directie.supplier_ID = mhl_suppliers.ID;
 ---- Had to solve issues in v_postadres in the CONCAT statement. Be aware of commas and proper syntax. + is not used!
 ---- USED LEFT JOIN to show all suppliers, whether or not there a contact (as stated in the IF(v_directie.contact <> '', v_directie.contact, 'tav directie') AS contact,)) which resulted in 8588 results.
 ---- With INNER JOIN it would only show results with present 'directie' known by name (contact)
+
+
+SELECT 
+    employee_id, first_name, last_name
+FROM
+    employees
+WHERE
+    department_id IN 
+    (SELECT 
+        department_id
+        FROM departments
+        WHERE location_id = 1700)
+ORDER BY first_name , last_name;
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
