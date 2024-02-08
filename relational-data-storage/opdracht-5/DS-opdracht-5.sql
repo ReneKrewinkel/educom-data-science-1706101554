@@ -542,3 +542,37 @@ FROM
 GROUP BY
     mhl_hitcount.year;
 ---------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 5.3.1 Maak een view 'DIRECTIE'
+
+-- mhl_departments [ID, name]
+-- mhl_contacts [ID, supplier_ID, department, contacttype, name, email, tel]
+
+SELECT 
+mhl_contacts.supplier_ID,
+mhl_contacts.name AS contact,
+mhl_departments.name AS department
+FROM mhl_contacts
+
+INNER JOIN mhl_departments
+ON mhl_departments.ID = mhl_contacts.department
+
+WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
+
+-- CREATE VIEW OF (WORKING) QUERY
+
+CREATE VIEW v_directie
+AS 
+SELECT 
+mhl_contacts.supplier_ID,
+mhl_contacts.name AS contact,
+mhl_departments.name AS department
+FROM mhl_contacts
+
+INNER JOIN mhl_departments
+ON mhl_departments.ID = mhl_contacts.department
+
+WHERE mhl_departments.name = 'Directie' OR mhl_contacts.contacttype ='directeur';
+
+---------------------------------------------------------------------------------------------------------------------------------------
