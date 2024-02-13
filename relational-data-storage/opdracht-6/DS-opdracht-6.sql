@@ -222,3 +222,61 @@ DAY(mhl_suppliers.joindate);
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+
+-- 6.2.2 Selecteer het ID, de joindate en het aantal dagen dat ze vandaag lid zijn, oplopend gesorteerd naar het aantal dagen lid.
+
+SELECT
+mhl_suppliers.ID AS ID,
+mhl_suppliers.joindate AS joindate,
+DATEDIFF(NOW(), joindate) AS aantal_dagen_lid
+
+FROM
+mhl_suppliers
+
+ORDER BY
+aantal_dagen_lid ASC;
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 6.2.3. Selecteer de naam van de dag en het aantal leveranciers dat op die dag lid geworden is.
+
+
+SELECT
+
+COUNT(DISTINCT mhl_suppliers.ID) AS aantal_leveranciers,
+DAYNAME(mhl_suppliers.joindate)AS day_of_the_week
+
+FROM 
+mhl_suppliers
+
+GROUP BY DAYNAME(mhl_suppliers.joindate)
+ORDER BY
+FIELD(day_of_the_week,'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday' )
+;
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+--6.2.4 Selecteer het aantal leveranciers dat lid is geworden per jaar en per maandnaam.
+
+SELECT
+
+COUNT(DISTINCT mhl_suppliers.ID) AS aantal_leveranciers,
+MONTHNAME(mhl_suppliers.joindate) AS maand,
+YEAR(mhl_suppliers.joindate) AS jaar
+
+FROM 
+mhl_suppliers
+
+GROUP BY  
+YEAR(mhl_suppliers.joindate),
+MONTH(mhl_suppliers.joindate),
+maand
+
+ORDER BY
+YEAR(mhl_suppliers.joindate),
+MONTH(mhl_suppliers.joindate)
+;
+
