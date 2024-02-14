@@ -335,3 +335,132 @@ ORDER BY plaatsnaam;
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
+
+-- 6.3.2. Selecteer de namen van de eerste 25 leveranciers met HTML-teken in hun naam, met de vervanging van deze tekens door het juiste speciale teken.
+
+-- vervangen van tekens: REPLACE
+
+SELECT mhl_suppliers.name AS leveranciersnaam, 
+CASE 
+
+WHEN mhl_suppliers.name LIKE '%&Auml;%' 
+THEN REPLACE(mhl_suppliers.name, '&Auml;', 'Ä')
+
+WHEN mhl_suppliers.name LIKE '%&auml;%' 
+THEN REPLACE(mhl_suppliers.name, '&auml;', 'ä')
+
+WHEN mhl_suppliers.name LIKE '%&aacute;%' 
+THEN REPLACE(mhl_suppliers.name, '&aacute;', 'á') 
+
+WHEN mhl_suppliers.name LIKE '%&Ouml;%' 
+THEN REPLACE(mhl_suppliers.name, '&Ouml;', 'Ö') 
+
+WHEN mhl_suppliers.name LIKE '%&ouml;%' 
+THEN REPLACE(mhl_suppliers.name, '&ouml;', 'ö') 
+
+WHEN mhl_suppliers.name LIKE '%&oacute;%' 
+THEN REPLACE(mhl_suppliers.name, '&oacute;', 'ó') 
+
+WHEN mhl_suppliers.name LIKE '%&Euml;%' 
+THEN REPLACE(mhl_suppliers.name, '&Euml;', 'Ë')
+
+WHEN mhl_suppliers.name LIKE '%&euml;%' 
+THEN REPLACE(mhl_suppliers.name, '&euml;', 'ë') 
+
+WHEN mhl_suppliers.name LIKE '%&eacute;%' 
+THEN REPLACE(mhl_suppliers.name, '&eacute;', 'é') 
+
+WHEN mhl_suppliers.name LIKE '%&Iuml;%' 
+THEN REPLACE(mhl_suppliers.name, '&Iuml;', 'Ï')
+
+WHEN mhl_suppliers.name LIKE '%&iuml;%' 
+THEN REPLACE(mhl_suppliers.name, '&iuml;', 'ï')
+
+WHEN mhl_suppliers.name LIKE '%&iacute;%' 
+THEN REPLACE(mhl_suppliers.name, '&iacute;', 'í') 
+
+WHEN mhl_suppliers.name LIKE '%&Uuml;%' 
+THEN REPLACE(mhl_suppliers.name, '&Uuml;', 'Ü') 
+
+WHEN mhl_suppliers.name LIKE '%&uuml;%' 
+THEN REPLACE(mhl_suppliers.name, '&uuml;', 'ü')
+
+WHEN mhl_suppliers.name LIKE '%&uacute;%' 
+THEN REPLACE(mhl_suppliers.name, '%uacute;', 'ú') 
+
+ELSE mhl_suppliers.name
+
+END AS nette_plaatsnaam
+
+FROM mhl_suppliers;
+
+---- &Uuml;lkem d&ouml;nerfabriek WORDT &Uuml;lkem d&ouml;nerfabriek
+
+SELECT 
+    mhl_suppliers.name AS leveranciersnaam, 
+    CASE 
+        WHEN mhl_suppliers.name LIKE '%Ü%' THEN REPLACE(mhl_suppliers.name, '&Uuml;', 'Ü')
+        WHEN mhl_suppliers.name LIKE '%Ö%' THEN REPLACE(mhl_suppliers.name, '&Ouml;', 'Ö')
+        WHEN mhl_suppliers.name LIKE '%Ä%' THEN REPLACE(mhl_suppliers.name, '&Auml;', 'Ä')
+        WHEN mhl_suppliers.name LIKE '%ü%' THEN REPLACE(mhl_suppliers.name, '&uuml;', 'ü')
+        WHEN mhl_suppliers.name LIKE '%ö%' THEN REPLACE(mhl_suppliers.name, '&ouml;', 'ö')
+        WHEN mhl_suppliers.name LIKE '%ä%' THEN REPLACE(mhl_suppliers.name, '&auml;', 'ä')
+        WHEN mhl_suppliers.name LIKE '%á%' THEN REPLACE(mhl_suppliers.name, '&aacute;', 'á') 
+        WHEN mhl_suppliers.name LIKE '%ó%' THEN REPLACE(mhl_suppliers.name, '&oacute;', 'ó') 
+        WHEN mhl_suppliers.name LIKE '%Ë%' THEN REPLACE(mhl_suppliers.name, '&Euml;', 'Ë')
+        WHEN mhl_suppliers.name LIKE '%ë%' THEN REPLACE(mhl_suppliers.name, '&euml;', 'ë') 
+        WHEN mhl_suppliers.name LIKE '%é%' THEN REPLACE(mhl_suppliers.name, '&eacute;', 'é') 
+        WHEN mhl_suppliers.name LIKE '%Ï%' THEN REPLACE(mhl_suppliers.name, '&Iuml;', 'Ï')
+        WHEN mhl_suppliers.name LIKE '%ï%' THEN REPLACE(mhl_suppliers.name, '&iuml;', 'ï')
+        WHEN mhl_suppliers.name LIKE '%í%' THEN REPLACE(mhl_suppliers.name, '&iacute;', 'í') 
+        WHEN mhl_suppliers.name LIKE '%x%' THEN REPLACE(mhl_suppliers.name, '&times;', 'x') 
+        WHEN mhl_suppliers.name LIKE '%÷%' THEN REPLACE(mhl_suppliers.name, '&divide;', '÷') 
+        ELSE mhl_suppliers.name
+    END AS nette_plaatsnaam
+FROM 
+    mhl_suppliers;
+
+----&Uuml;lkem d&ouml;nerfabriek WORDT Ülkem d&ouml;nerfabriek, replaces only the first html character it encounters
+
+SELECT 
+    mhl_suppliers.name AS leveranciersnaam,
+    REPLACE(
+        REPLACE(
+            REPLACE(
+                REPLACE(
+                    REPLACE(
+                        REPLACE(
+                            REPLACE(
+                                REPLACE(
+                                    REPLACE(
+                                        REPLACE(
+                                            REPLACE(
+                                                REPLACE(
+                                                    REPLACE(
+                                                        REPLACE(
+                                                            REPLACE(
+                                                                REPLACE(
+                                                                    mhl_suppliers.name,
+                                                                    '&Uuml;', 'Ü'),
+                                                                '&Ouml;', 'Ö'),
+                                                            '&Auml;', 'Ä'),
+                                                        '&uuml;', 'ü'),
+                                                    '&ouml;', 'ö'),
+                                                '&auml;', 'ä'),
+                                            '&aacute;', 'á'),
+                                        '&oacute;', 'ó'),
+                                    '&Euml;', 'Ë'),
+                                '&euml;', 'ë'),
+                            '&eacute;', 'é'),
+                        '&Iuml;', 'Ï'),
+                    '&iuml;', 'ï'),
+                '&iacute;', 'í'),
+            '&times;', 'x'),
+        '&divide;', '÷'
+    ) AS nette_plaatsnaam
+FROM 
+    mhl_suppliers;
+
+---- &Uuml;lkem d&ouml;nerfabriek WORDT Ülkem dönerfabriek
+---- still has to be filtered by only names with HTML signs  
+
