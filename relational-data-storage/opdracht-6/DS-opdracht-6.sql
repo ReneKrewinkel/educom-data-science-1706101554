@@ -280,3 +280,58 @@ YEAR(mhl_suppliers.joindate),
 MONTH(mhl_suppliers.joindate)
 ;
 
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+
+-- 6.3.1 Selecteer alle plaatsnamen met uppercase van de eerste letter.
+
+SELECT
+
+mhl_cities.name AS plaatsnaam,
+CONCAT(UPPER(LEFT(mhl_cities.name,1)), LOWER(RIGHT(mhl_cities.name,LENGTH(mhl_cities.name)-1))) AS nette_plaatsnaam
+
+FROM mhl_cities
+
+ORDER BY plaatsnaam
+
+---- de plaatsnamen met een ' vooraan kregen geen hoofdletter. In search bar zoeken naar name LIKE ' krijgt geen resultaten, ook niet op 't of 's. 
+
+-- SELECT * FROM mhl_cities WHERE mhl_cities.name LIKE '\'%'; (CHATGPT answer after trial and error)
+
+SELECT 
+    mhl_cities.name AS plaatsnaam,
+    CASE
+        WHEN mhl_cities.name LIKE ''\''%'' THEN CONCAT(LOWER(SUBSTRING(mhl_cities.name, 1, 2)), UPPER(SUBSTRING(mhl_cities.name, 4, 1)))
+        ELSE CONCAT(UPPER(LEFT(mhl_cities.name,1)), LOWER(RIGHT(mhl_cities.name,LENGTH(mhl_cities.name)-1)))
+    END AS nette_plaatsnaam
+FROM mhl_cities
+ORDER BY plaatsnaam;
+---- IN VSCODE " '\'%'  " Cannot be shown properly to add comments like this after the code so I had to do '' instead of '
+---- This line of code shows 's en 't in Lowercase letters, the 4 character in uppercase but the _ in between is gone. 
+
+SELECT 
+    mhl_cities.name AS plaatsnaam,
+    CASE
+        WHEN mhl_cities.name LIKE ''\''%'' THEN CONCAT(LOWER(SUBSTRING(mhl_cities.name, 1, 2)), UPPER(SUBSTRING(mhl_cities.name, 3, 2)))
+        ELSE CONCAT(UPPER(LEFT(mhl_cities.name,1)), LOWER(RIGHT(mhl_cities.name,LENGTH(mhl_cities.name)-1)))
+    END AS nette_plaatsnaam
+FROM mhl_cities
+ORDER BY plaatsnaam;
+
+----Shows the 's and 't in Lowercase, the _ and the fourth character in Uppercase
+
+SELECT 
+mhl_cities.name AS plaatsnaam,
+CASE
+WHEN mhl_cities.name LIKE ''\''%'' THEN CONCAT(LOWER(SUBSTRING(mhl_cities.name, 1, 2)), UPPER(SUBSTRING(mhl_cities.name, 3, 2)), LOWER(SUBSTRING(mhl_cities.name, 5)))
+ELSE CONCAT(UPPER(LEFT(mhl_cities.name,1)), LOWER(RIGHT(mhl_cities.name,LENGTH(mhl_cities.name)-1)))
+END AS nette_plaatsnaam
+FROM mhl_cities
+ORDER BY plaatsnaam;
+                                                                                    
+---- For the sake of being able to write comments, '\'%' is written like ''\''%'' 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
