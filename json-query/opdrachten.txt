@@ -1,4 +1,4 @@
-jq '.[] | {country, populationDensity: (.population_1970 / .area_km2)}' world-population.json >output.json
+jq '.[] | {country, populationDensity: (.population_1970 / .area_km2)}' world-population.json
 
 
 jq 'group_by(.continent) | map({
@@ -10,20 +10,22 @@ jq 'group_by(.continent) | map({
 
 jq 'group_by(.continent) | map({
     continent: .[0].continent,
-    populationGrowthRates: {
-        "2022": (map(.population_growth_rate) | .[6]),
-        "2020": (map(.population_growth_rate) | .[7]),
-        "2015": (map(.population_growth_rate) | .[8]),
-        "2010": (map(.population_growth_rate) | .[9]),
-        "2000": (map(.population_growth_rate) | .[10]),
-        "1990": (map(.population_growth_rate) | .[11]),
-        "1980": (map(.population_growth_rate) | .[12]),
-        "1970": (map(.population_growth_rate) | .[13])
+    populationGrowth: {
+        "2022": (.[0].population_2022 - .[0].population_2020),
+        "2020": (.[0].population_2020 - .[0].population_2015),
+        "2015": (.[0].population_2015 - .[0].population_2010),
+        "2010": (.[0].population_2010 - .[0].population_2000),
+        "2000": (.[0].population_2000 - .[0].population_1990),
+        "1990": (.[0].population_1990 - .[0].population_1980),
+        "1980": (.[0].population_1980 - .[0].population_1970),
+        "1970": (.[0].population_1970)
     }
 })' world-population.json
 
-jq 'group_by(.continent) | map({
-    percentageOfWorldPopulation: ((map(.percentage_world_population) | add) | tostring + "%") 
+
+thegoodecode@Annes-MacBook-Pro json-query % jq 'group_by(.continent) | map({
+    continent: .[0].continent,
+    percentageOfWorldPopulation: ((map(.percentage_world_population) | add) | tostring + "%")
   })' world-population.json
 
 
@@ -32,3 +34,15 @@ jq 'group_by(.continent) | map({
     totalPopulationGrowth: (map(.population_growth_rate) | add)
   })' world-population.json
 
+
+
+thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht1.json > opdracht1.csv
+
+thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht2.json > opdracht2.csv
+
+jq -r '["Continent", "Population Growth 2022", "Population Growth 2020", "Population Growth 2015", "Population Growth 2010", "Population Growth 2000", "Population Growth 1990", "Population Growth 1980", "Population Growth 1970"], (.[] | [.continent, .populationGrowth."2022", .populationGrowth."2020", .populationGrowth."2015", .populationGrowth."2010", .populationGrowth."2000", .populationGrowth."1990", .populationGrowth."1980", .populationGrowth."1970"]) | @csv' world-population.json
+
+
+thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht4.json > opdracht4.csv
+
+thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht5.json > opdracht5.csv

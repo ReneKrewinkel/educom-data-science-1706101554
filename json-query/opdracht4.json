@@ -1,20 +1,26 @@
 [
   {
+    "continent": "Africa",
     "percentageOfWorldPopulation": "17.869999999999997%"
   },
   {
+    "continent": "Asia",
     "percentageOfWorldPopulation": "59.19%"
   },
   {
+    "continent": "Europe",
     "percentageOfWorldPopulation": "9.33%"
   },
   {
+    "continent": "North America",
     "percentageOfWorldPopulation": "7.51%"
   },
   {
+    "continent": "Oceania",
     "percentageOfWorldPopulation": "0.55%"
   },
   {
+    "continent": "South America",
     "percentageOfWorldPopulation": "5.4799999999999995%"
   }
 ]
