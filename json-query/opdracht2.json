@@ -1,0 +1,26 @@
+[
+  {
+    "continent": "Africa",
+    "averagePopulationGrowthRate": 1.0206333333333333
+  },
+  {
+    "continent": "Asia",
+    "averagePopulationGrowthRate": 1.0071444444444444
+  },
+  {
+    "continent": "Europe",
+    "averagePopulationGrowthRate": 1.0006111111111111
+  },
+  {
+    "continent": "North America",
+    "averagePopulationGrowthRate": 1.005077777777778
+  },
+  {
+    "continent": "Oceania",
+    "averagePopulationGrowthRate": 1.0055000000000003
+  },
+  {
+    "continent": "South America",
+    "averagePopulationGrowthRate": 1.0087571428571427
+  }
+]

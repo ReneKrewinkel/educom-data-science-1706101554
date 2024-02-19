@@ -1,0 +1,26 @@
+[
+  {
+    "continent": "Africa",
+    "totalPopulationGrowth": 58.210899999999995
+  },
+  {
+    "continent": "Asia",
+    "totalPopulationGrowth": 50.46919999999999
+  },
+  {
+    "continent": "Europe",
+    "totalPopulationGrowth": 50.112799999999986
+  },
+  {
+    "continent": "North America",
+    "totalPopulationGrowth": 40.167
+  },
+  {
+    "continent": "Oceania",
+    "totalPopulationGrowth": 23.169800000000002
+  },
+  {
+    "continent": "South America",
+    "totalPopulationGrowth": 14.111400000000001
+  }
+]

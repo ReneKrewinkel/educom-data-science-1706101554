@@ -1,0 +1,939 @@
+[
+{
+  "country": "Afghanistan",
+  "populationDensity": 16.48647103015807
+},
+{
+  "country": "Albania",
+  "populationDensity": 80.86583414498399
+},
+{
+  "country": "Algeria",
+  "populationDensity": 5.792365752615419
+},
+{
+  "country": "American Samoa",
+  "populationDensity": 136.05527638190955
+},
+{
+  "country": "Andorra",
+  "populationDensity": 42.43589743589744
+},
+{
+  "country": "Angola",
+  "populationDensity": 4.836528435068581
+},
+{
+  "country": "Anguilla",
+  "populationDensity": 69.04395604395604
+},
+{
+  "country": "Antigua and Barbuda",
+  "populationDensity": 145.96380090497738
+},
+{
+  "country": "Argentina",
+  "populationDensity": 8.575313983599482
+},
+{
+  "country": "Armenia",
+  "populationDensity": 85.20919207880846
+},
+{
+  "country": "Aruba",
+  "populationDensity": 328.3666666666667
+},
+{
+  "country": "Australia",
+  "populationDensity": 1.6374148078581139
+},
+{
+  "country": "Austria",
+  "populationDensity": 89.00932384256775
+},
+{
+  "country": "Azerbaijan",
+  "populationDensity": 62.64800230946882
+},
+{
+  "country": "Bahamas",
+  "populationDensity": 12.84723517177078
+},
+{
+  "country": "Bahrain",
+  "populationDensity": 290.921568627451
+},
+{
+  "country": "Bangladesh",
+  "populationDensity": 457.69370468252356
+},
+{
+  "country": "Barbados",
+  "populationDensity": 561.3883720930232
+},
+{
+  "country": "Belarus",
+  "populationDensity": 44.17526974951831
+},
+{
+  "country": "Belgium",
+  "populationDensity": 315.42767295597486
+},
+{
+  "country": "Belize",
+  "populationDensity": 5.264521466515719
+},
+{
+  "country": "Benin",
+  "populationDensity": 26.845935962778142
+},
+{
+  "country": "Bermuda",
+  "populationDensity": 963.3148148148148
+},
+{
+  "country": "Bhutan",
+  "populationDensity": 7.78491430952753
+},
+{
+  "country": "Bolivia",
+  "populationDensity": 4.174196531707721
+},
+{
+  "country": "Bosnia and Herzegovina",
+  "populationDensity": 74.50957839442286
+},
+{
+  "country": "Botswana",
+  "populationDensity": 1.0176013745704466
+},
+{
+  "country": "Brazil",
+  "populationDensity": 11.316640650219762
+},
+{
+  "country": "British Virgin Islands",
+  "populationDensity": 63.450331125827816
+},
+{
+  "country": "Brunei",
+  "populationDensity": 23.129748482220293
+},
+{
+  "country": "Bulgaria",
+  "populationDensity": 77.40825584646326
+},
+{
+  "country": "Burkina Faso",
+  "populationDensity": 20.55803815113182
+},
+{
+  "country": "Burundi",
+  "populationDensity": 125.66767263059567
+},
+{
+  "country": "Cambodia",
+  "populationDensity": 37.05650840997597
+},
+{
+  "country": "Cameroon",
+  "populationDensity": 13.57218546110777
+},
+{
+  "country": "Canada",
+  "populationDensity": 2.146748665704525
+},
+{
+  "country": "Cape Verde",
+  "populationDensity": 71.22787007190676
+},
+{
+  "country": "Cayman Islands",
+  "populationDensity": 39.89772727272727
+},
+{
+  "country": "Central African Republic",
+  "populationDensity": 3.3184736686656477
+},
+{
+  "country": "Chad",
+  "populationDensity": 2.856225856697819
+},
+{
+  "country": "Chile",
+  "populationDensity": 12.988301842873051
+},
+{
+  "country": "China",
+  "populationDensity": 84.73655658037568
+},
+{
+  "country": "Colombia",
+  "populationDensity": 18.30986697590011
+},
+{
+  "country": "Comoros",
+  "populationDensity": 130.156283566058
+},
+{
+  "country": "Cook Islands",
+  "populationDensity": 86.73728813559322
+},
+{
+  "country": "Costa Rica",
+  "populationDensity": 36.315009784735814
+},
+{
+  "country": "Croatia",
+  "populationDensity": 79.38364490935435
+},
+{
+  "country": "Cuba",
+  "populationDensity": 80.7181755305595
+},
+{
+  "country": "Curacao",
+  "populationDensity": 338.7049549549549
+},
+{
+  "country": "Cyprus",
+  "populationDensity": 69.26861960869095
+},
+{
+  "country": "Czech Republic",
+  "populationDensity": 124.20901540607368
+},
+{
+  "country": "Denmark",
+  "populationDensity": 114.2377825219288
+},
+{
+  "country": "Djibouti",
+  "populationDensity": 6.223232758620689
+},
+{
+  "country": "Dominica",
+  "populationDensity": 91.73768308921439
+},
+{
+  "country": "Dominican Republic",
+  "populationDensity": 91.96176367857656
+},
+{
+  "country": "DR Congo",
+  "populationDensity": 8.594009957106145
+},
+{
+  "country": "Ecuador",
+  "populationDensity": 22.295162205020212
+},
+{
+  "country": "Egypt",
+  "populationDensity": 34.69697840291286
+},
+{
+  "country": "El Salvador",
+  "populationDensity": 172.0018059978138
+},
+{
+  "country": "Equatorial Guinea",
+  "populationDensity": 11.299240668781861
+},
+{
+  "country": "Eritrea",
+  "populationDensity": 10.822687074829933
+},
+{
+  "country": "Estonia",
+  "populationDensity": 30.114732350144823
+},
+{
+  "country": "Eswatini",
+  "populationDensity": 25.504780004607234
+},
+{
+  "country": "Ethiopia",
+  "populationDensity": 25.63456126052703
+},
+{
+  "country": "Falkland Islands",
+  "populationDensity": 0.18680686765793147
+},
+{
+  "country": "Faroe Islands",
+  "populationDensity": 27.57788944723618
+},
+{
+  "country": "Fiji",
+  "populationDensity": 28.876641856392293
+},
+{
+  "country": "Finland",
+  "populationDensity": 13.611980828782828
+},
+{
+  "country": "France",
+  "populationDensity": 91.57883613228324
+},
+{
+  "country": "French Guiana",
+  "populationDensity": 0.55646802499581
+},
+{
+  "country": "French Polynesia",
+  "populationDensity": 28.29157667386609
+},
+{
+  "country": "Gabon",
+  "populationDensity": 2.231092248606483
+},
+{
+  "country": "Gambia",
+  "populationDensity": 49.464963981663395
+},
+{
+  "country": "Georgia",
+  "populationDensity": 68.87268292682927
+},
+{
+  "country": "Germany",
+  "populationDensity": 219.2425471978136
+},
+{
+  "country": "Ghana",
+  "populationDensity": 37.15165197268303
+},
+{
+  "country": "Gibraltar",
+  "populationDensity": 4447.5
+},
+{
+  "country": "Greece",
+  "populationDensity": 64.73879081748618
+},
+{
+  "country": "Greenland",
+  "populationDensity": 0.020975159804366032
+},
+{
+  "country": "Grenada",
+  "populationDensity": 287.1918604651163
+},
+{
+  "country": "Guadeloupe",
+  "populationDensity": 195.52211302211302
+},
+{
+  "country": "Guam",
+  "populationDensity": 160.83788706739526
+},
+{
+  "country": "Guatemala",
+  "populationDensity": 50.080430530172926
+},
+{
+  "country": "Guernsey",
+  "populationDensity": 675.0769230769231
+},
+{
+  "country": "Guinea",
+  "populationDensity": 17.174105272577147
+},
+{
+  "country": "Guinea-Bissau",
+  "populationDensity": 16.378214532871972
+},
+{
+  "country": "Guyana",
+  "populationDensity": 3.2807567602770633
+},
+{
+  "country": "Haiti",
+  "populationDensity": 168.6779099099099
+},
+{
+  "country": "Honduras",
+  "populationDensity": 24.737341322049566
+},
+{
+  "country": "Hong Kong",
+  "populationDensity": 3582.4927536231885
+},
+{
+  "country": "Hungary",
+  "populationDensity": 110.88452938900116
+},
+{
+  "country": "Iceland",
+  "populationDensity": 1.985126213592233
+},
+{
+  "country": "India",
+  "populationDensity": 169.57750236495426
+},
+{
+  "country": "Indonesia",
+  "populationDensity": 60.50103409222769
+},
+{
+  "country": "Iran",
+  "populationDensity": 17.26112808253878
+},
+{
+  "country": "Iraq",
+  "populationDensity": 22.384135226331626
+},
+{
+  "country": "Ireland",
+  "populationDensity": 41.803210336829224
+},
+{
+  "country": "Isle of Man",
+  "populationDensity": 96.67482517482517
+},
+{
+  "country": "Israel",
+  "populationDensity": 139.97626384207993
+},
+{
+  "country": "Italy",
+  "populationDensity": 176.9587304537128
+},
+{
+  "country": "Ivory Coast",
+  "populationDensity": 16.985161088248883
+},
+{
+  "country": "Jamaica",
+  "populationDensity": 169.1466654535529
+},
+{
+  "country": "Japan",
+  "populationDensity": 278.932180562538
+},
+{
+  "country": "Jersey",
+  "populationDensity": 589.198275862069
+},
+{
+  "country": "Jordan",
+  "populationDensity": 17.431599919410804
+},
+{
+  "country": "Kazakhstan",
+  "populationDensity": 4.501194539249147
+},
+{
+  "country": "Kenya",
+  "populationDensity": 19.768675682800712
+},
+{
+  "country": "Kiribati",
+  "populationDensity": 70.82244143033292
+},
+{
+  "country": "Kuwait",
+  "populationDensity": 45.054776069143564
+},
+{
+  "country": "Kyrgyzstan",
+  "populationDensity": 15.085615975914099
+},
+{
+  "country": "Laos",
+  "populationDensity": 11.297647804054055
+},
+{
+  "country": "Latvia",
+  "populationDensity": 37.13524063259964
+},
+{
+  "country": "Lebanon",
+  "populationDensity": 227.87897053195562
+},
+{
+  "country": "Lesotho",
+  "populationDensity": 33.71704826223028
+},
+{
+  "country": "Liberia",
+  "populationDensity": 13.141565426644757
+},
+{
+  "country": "Libya",
+  "populationDensity": 1.0850432499403253
+},
+{
+  "country": "Liechtenstein",
+  "populationDensity": 131.80625
+},
+{
+  "country": "Lithuania",
+  "populationDensity": 49.15998468606432
+},
+{
+  "country": "Luxembourg",
+  "populationDensity": 131.22273781902553
+},
+{
+  "country": "Macau",
+  "populationDensity": 8242.8
+},
+{
+  "country": "Madagascar",
+  "populationDensity": 11.310540490357573
+},
+{
+  "country": "Malawi",
+  "populationDensity": 39.03599642145775
+},
+{
+  "country": "Malaysia",
+  "populationDensity": 31.156029419322074
+},
+{
+  "country": "Maldives",
+  "populationDensity": 410.81
+},
+{
+  "country": "Mali",
+  "populationDensity": 4.961801882289194
+},
+{
+  "country": "Malta",
+  "populationDensity": 998.1455696202531
+},
+{
+  "country": "Marshall Islands",
+  "populationDensity": 132.4254143646409
+},
+{
+  "country": "Martinique",
+  "populationDensity": 289.38652482269504
+},
+{
+  "country": "Mauritania",
+  "populationDensity": 1.0887726787620065
+},
+{
+  "country": "Mauritius",
+  "populationDensity": 406.91911764705884
+},
+{
+  "country": "Mayotte",
+  "populationDensity": 94.60695187165776
+},
+{
+  "country": "Mexico",
+  "populationDensity": 25.600664842507157
+},
+{
+  "country": "Micronesia",
+  "populationDensity": 84.02991452991454
+},
+{
+  "country": "Moldova",
+  "populationDensity": 109.64781658098445
+},
+{
+  "country": "Monaco",
+  "populationDensity": 12135
+},
+{
+  "country": "Mongolia",
+  "populationDensity": 0.8272308213616689
+},
+{
+  "country": "Montenegro",
+  "populationDensity": 38.39183318853171
+},
+{
+  "country": "Montserrat",
+  "populationDensity": 111.7843137254902
+},
+{
+  "country": "Morocco",
+  "populationDensity": 34.20524241406338
+},
+{
+  "country": "Mozambique",
+  "populationDensity": 10.493738694344989
+},
+{
+  "country": "Myanmar",
+  "populationDensity": 40.32663196261185
+},
+{
+  "country": "Namibia",
+  "populationDensity": 0.9138242401119165
+},
+{
+  "country": "Nauru",
+  "populationDensity": 317.2857142857143
+},
+{
+  "country": "Nepal",
+  "populationDensity": 84.93817136722811
+},
+{
+  "country": "Netherlands",
+  "populationDensity": 311.533715651135
+},
+{
+  "country": "New Caledonia",
+  "populationDensity": 5.974804845222073
+},
+{
+  "country": "New Zealand",
+  "populationDensity": 10.441425386461194
+},
+{
+  "country": "Nicaragua",
+  "populationDensity": 18.752095909429098
+},
+{
+  "country": "Niger",
+  "populationDensity": 3.6856416732438833
+},
+{
+  "country": "Nigeria",
+  "populationDensity": 60.154999956699086
+},
+{
+  "country": "Niue",
+  "populationDensity": 19.942307692307693
+},
+{
+  "country": "North Korea",
+  "populationDensity": 124.41619240405515
+},
+{
+  "country": "North Macedonia",
+  "populationDensity": 64.43367168358418
+},
+{
+  "country": "Northern Mariana Islands",
+  "populationDensity": 21.85991379310345
+},
+{
+  "country": "Norway",
+  "populationDensity": 11.968876041531553
+},
+{
+  "country": "Oman",
+  "populationDensity": 2.1670210016155087
+},
+{
+  "country": "Pakistan",
+  "populationDensity": 67.22991863133737
+},
+{
+  "country": "Palau",
+  "populationDensity": 24.762527233115467
+},
+{
+  "country": "Palestine",
+  "populationDensity": 179.78151125401928
+},
+{
+  "country": "Panama",
+  "populationDensity": 20.104061418513066
+},
+{
+  "country": "Papua New Guinea",
+  "populationDensity": 5.377795782559848
+},
+{
+  "country": "Paraguay",
+  "populationDensity": 5.922004071276847
+},
+{
+  "country": "Peru",
+  "populationDensity": 10.552600496725843
+},
+{
+  "country": "Philippines",
+  "populationDensity": 109.3479128268191
+},
+{
+  "country": "Poland",
+  "populationDensity": 103.88591174974974
+},
+{
+  "country": "Portugal",
+  "populationDensity": 94.29504832229341
+},
+{
+  "country": "Puerto Rico",
+  "populationDensity": 308.6379932356257
+},
+{
+  "country": "Qatar",
+  "populationDensity": 10.185309856723633
+},
+{
+  "country": "Republic of the Congo",
+  "populationDensity": 4.084763157894737
+},
+{
+  "country": "Reunion",
+  "populationDensity": 188.73954599761052
+},
+{
+  "country": "Romania",
+  "populationDensity": 83.57118347588626
+},
+{
+  "country": "Russia",
+  "populationDensity": 7.608560575993719
+},
+{
+  "country": "Rwanda",
+  "populationDensity": 147.9370870984889
+},
+{
+  "country": "Saint Barthelemy",
+  "populationDensity": 115.0952380952381
+},
+{
+  "country": "Saint Kitts and Nevis",
+  "populationDensity": 172.2911877394636
+},
+{
+  "country": "Saint Lucia",
+  "populationDensity": 167.3538961038961
+},
+{
+  "country": "Saint Martin",
+  "populationDensity": 109.47169811320755
+},
+{
+  "country": "Saint Pierre and Miquelon",
+  "populationDensity": 22.880165289256198
+},
+{
+  "country": "Saint Vincent and the Grenadines",
+  "populationDensity": 253.10796915167094
+},
+{
+  "country": "Samoa",
+  "populationDensity": 50.23610133708656
+},
+{
+  "country": "San Marino",
+  "populationDensity": 297.8524590163934
+},
+{
+  "country": "Sao Tome and Principe",
+  "populationDensity": 80.48029045643153
+},
+{
+  "country": "Saudi Arabia",
+  "populationDensity": 2.840498397443352
+},
+{
+  "country": "Senegal",
+  "populationDensity": 22.202620957493316
+},
+{
+  "country": "Serbia",
+  "populationDensity": 81.41072418827311
+},
+{
+  "country": "Seychelles",
+  "populationDensity": 120.3075221238938
+},
+{
+  "country": "Sierra Leone",
+  "populationDensity": 38.730931140228606
+},
+{
+  "country": "Singapore",
+  "populationDensity": 2903.987323943662
+},
+{
+  "country": "Sint Maarten",
+  "populationDensity": 184.11764705882354
+},
+{
+  "country": "Slovakia",
+  "populationDensity": 92.23376226114975
+},
+{
+  "country": "Slovenia",
+  "populationDensity": 85.89187589404627
+},
+{
+  "country": "Solomon Islands",
+  "populationDensity": 5.981208471760797
+},
+{
+  "country": "Somalia",
+  "populationDensity": 5.835389558963518
+},
+{
+  "country": "South Africa",
+  "populationDensity": 18.319105809242473
+},
+{
+  "country": "South Korea",
+  "populationDensity": 325.3282406945415
+},
+{
+  "country": "South Sudan",
+  "populationDensity": 5.393202042775657
+},
+{
+  "country": "Spain",
+  "populationDensity": 66.7848839507344
+},
+{
+  "country": "Sri Lanka",
+  "populationDensity": 188.82440176802317
+},
+{
+  "country": "Sudan",
+  "populationDensity": 5.994060659530834
+},
+{
+  "country": "Suriname",
+  "populationDensity": 2.3191185447442315
+},
+{
+  "country": "Sweden",
+  "populationDensity": 17.82765076227806
+},
+{
+  "country": "Switzerland",
+  "populationDensity": 149.72451797306462
+},
+{
+  "country": "Syria",
+  "populationDensity": 34.12463008964251
+},
+{
+  "country": "Taiwan",
+  "populationDensity": 413.2807448954218
+},
+{
+  "country": "Tajikistan",
+  "populationDensity": 20.915576519916144
+},
+{
+  "country": "Tanzania",
+  "populationDensity": 14.409458600107715
+},
+{
+  "country": "Thailand",
+  "populationDensity": 69.75313376987839
+},
+{
+  "country": "Timor-Leste",
+  "populationDensity": 37.247613284926715
+},
+{
+  "country": "Togo",
+  "populationDensity": 38.6965395791142
+},
+{
+  "country": "Tokelau",
+  "populationDensity": 142.83333333333334
+},
+{
+  "country": "Tonga",
+  "populationDensity": 115.77510040160642
+},
+{
+  "country": "Trinidad and Tobago",
+  "populationDensity": 192.76608187134502
+},
+{
+  "country": "Tunisia",
+  "populationDensity": 30.850216979402237
+},
+{
+  "country": "Turkey",
+  "populationDensity": 45.358235851151534
+},
+{
+  "country": "Turkmenistan",
+  "populationDensity": 4.51020692481049
+},
+{
+  "country": "Turks and Caicos Islands",
+  "populationDensity": 5.975738396624473
+},
+{
+  "country": "Tuvalu",
+  "populationDensity": 223.6153846153846
+},
+{
+  "country": "Uganda",
+  "populationDensity": 42.712531566963364
+},
+{
+  "country": "Ukraine",
+  "populationDensity": 78.34148467274234
+},
+{
+  "country": "United Arab Emirates",
+  "populationDensity": 3.565598086124402
+},
+{
+  "country": "United Kingdom",
+  "populationDensity": 229.10731165088515
+},
+{
+  "country": "United States",
+  "populationDensity": 21.37380516206265
+},
+{
+  "country": "United States Virgin Islands",
+  "populationDensity": 182.84149855907782
+},
+{
+  "country": "Uruguay",
+  "populationDensity": 15.412933482108333
+},
+{
+  "country": "Uzbekistan",
+  "populationDensity": 26.84702950379973
+},
+{
+  "country": "Vanuatu",
+  "populationDensity": 7.139141849208302
+},
+{
+  "country": "Vatican City",
+  "populationDensity": 752
+},
+{
+  "country": "Venezuela",
+  "populationDensity": 12.390787226729373
+},
+{
+  "country": "Vietnam",
+  "populationDensity": 126.59217963117278
+},
+{
+  "country": "Wallis and Futuna",
+  "populationDensity": 66.03521126760563
+},
+{
+  "country": "Western Sahara",
+  "populationDensity": 0.287109022556391
+},
+{
+  "country": "Yemen",
+  "populationDensity": 12.962162479544215
+},
+{
+  "country": "Zambia",
+  "populationDensity": 5.6890814921898665
+},
+{
+  "country": "Zimbabwe",
+  "populationDensity": 13.31497068510609
+}
+
+]
