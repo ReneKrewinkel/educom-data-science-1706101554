@@ -1,6 +1,7 @@
+-------- opdracht1
 jq '.[] | {country, populationDensity: (.population_1970 / .area_km2)}' world-population.json
 
-
+-------- opdracht2
 jq 'group_by(.continent) | map({
     continent: .[0].continent,
     averagePopulationGrowthRate: (
@@ -8,6 +9,7 @@ jq 'group_by(.continent) | map({
     )
   })' world-population.json
 
+-------- opdracht3
 jq 'group_by(.continent) | map({
     continent: .[0].continent,
     populationGrowth: {
@@ -22,27 +24,49 @@ jq 'group_by(.continent) | map({
     }
 })' world-population.json
 
-
+-------- opdracht4
 thegoodecode@Annes-MacBook-Pro json-query % jq 'group_by(.continent) | map({
     continent: .[0].continent,
     percentageOfWorldPopulation: ((map(.percentage_world_population) | add) | tostring + "%")
   })' world-population.json
 
-
+-------- opdracht5
   jq 'group_by(.continent) | map({
     continent: .[0].continent,
     totalPopulationGrowth: (map(.population_growth_rate) | add)
   })' world-population.json
 
 
-
+-------- opdracht6
 thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht1.json > opdracht1.csv
 
 thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht2.json > opdracht2.csv
 
 jq -r '["Continent", "Population Growth 2022", "Population Growth 2020", "Population Growth 2015", "Population Growth 2010", "Population Growth 2000", "Population Growth 1990", "Population Growth 1980", "Population Growth 1970"], (.[] | [.continent, .populationGrowth."2022", .populationGrowth."2020", .populationGrowth."2015", .populationGrowth."2010", .populationGrowth."2000", .populationGrowth."1990", .populationGrowth."1980", .populationGrowth."1970"]) | @csv' world-population.json
 
-
 thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht4.json > opdracht4.csv
 
 thegoodecode@Annes-MacBook-Pro json-query % jq -r '(.[0] | keys_unsorted) as $keys | $keys, map([.[ $keys[] ]])[] | @csv' opdracht5.json > opdracht5.csv
+
+-------- opdracht7
+jq 'map({
+    rank,
+    cca3,
+    country,
+    capital,
+    continent,
+    population: [
+        {year: 2022, population: .population_2022},
+        {year: 2020, population: .population_2020},
+        {year: 2015, population: .population_2015},
+        {year: 2010, population: .population_2010},
+        {year: 2000, population: .population_2000},
+        {year: 1990, population: .population_1990},
+        {year: 1980, population: .population_1980},
+        {year: 1970, population: .population_1970}
+    ],
+    area_km2,
+    population_density,
+    population_growth_rate,
+    percentage_world_population
+})' world-population.json
